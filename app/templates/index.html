@@ -40,9 +40,9 @@ https://templatemo.com/tm-539-simple-house
 						</div>
 						<nav class="col-md-6 col-12 tm-nav">
 							<ul class="tm-nav-ul">
-								<li class="tm-nav-li"><a href="index.html" class="tm-nav-link active">Accueil</a></li>
-								<li class="tm-nav-li"><a href="about.html" class="tm-nav-link">	A Propos</a></li>
-								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link">Contact</a></li>
+								<li class="tm-nav-li"><a href="/"  class="tm-nav-link active">Accueil </a></li>
+								<li class="tm-nav-li"><a href="/a-propos" class="tm-nav-link">A Propos</a></li>
+								<li class="tm-nav-li"><a href="/contact"  class="tm-nav-link">Contact </a></li>
 							</ul>
 						</nav>
 					</div>
@@ -76,19 +76,22 @@ https://templatemo.com/tm-539-simple-house
 				{% for categorie in categories %}
 					<div id="tm-gallery-page-{{categorie.nom.lower()}}" class="tm-gallery-page">
 						{% for produit in categorie.produits %}
-							<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-								<figure>
-									<img src="/static/img/gallery/{{categorie.galerie}}/{{produit.image}}"
-											alt="Image" class="img-fluid tm-gallery-img" style="width:250px; height:250px;"/>
-									<figcaption>
+							<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item" style="-moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc; margin:12px;">
+								<figure style="height:35em;">
+									<img src="/static/img/gallery/{{categorie.galerie}}/{{produit.image}}" alt="Image"
+											class="img-fluid tm-gallery-img" style="width:250px; height:250px;"/>
+									<figcaption style="height:250px;">
 										<h4 class="tm-gallery-title">{{produit.titre}}</h4>
-										<p class="tm-gallery-description">{{produit.description}}</p>
-
-										<button type="button" class="btn btn-outline-success" style="float:right;">
-											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-											&nbsp;	Acheter
-										</button>
-										<p class="tm-gallery-price">	{{produit.prix}} Dhs</p>
+										<p class="tm-gallery-description" style="height: 150px;">{{produit.description}}</p>
+										<div style="height: 50px;">
+											<button type="button" class="btn btn-outline-success" style="float:right;">
+												<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+												&nbsp;	Acheter
+											</button>
+											<p class="tm-gallery-price">	{{produit.prix}} Dh</p>
+										</div>
 										<!-- CSS only -->
 									</figcaption>
 								</figure>
@@ -108,7 +111,7 @@ https://templatemo.com/tm-539-simple-house
 						<div class="tm-description-box">
 							<h4 class="tm-gallery-title">Maecenas nulla neque</h4>
 							<p class="tm-mb-45">Redistributing this template as a downloadable ZIP file on any template collection site is strictly prohibited. You will need to <a rel="nofollow" href="https://templatemo.com/contact">talk to us</a> for additional permissions about our templates. Thank you.</p>
-							<a href="about.html" class="tm-btn tm-btn-default tm-right">Read More</a>
+							<a href="/a-propos" class="tm-btn tm-btn-default tm-right">Read More</a>
 						</div>
 					</div>
 				</div>
@@ -128,7 +131,6 @@ https://templatemo.com/tm-539-simple-house
 		$(window).bind("load", function() {
 		   $('.tm-gallery-page').addClass('hidden');
 			 var lien_actif = document.getElementsByClassName('tm-paging-link')[0];
-			 console.log("lien actif:", lien_actif);
 			 var pages = document.getElementsByClassName("tm-gallery-page");
 			 $(".tm-gallery-page").addClass("hidden");
 			 pages[0].classList.remove("hidden");//.add("active");
