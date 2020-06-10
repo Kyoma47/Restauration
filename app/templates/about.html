@@ -58,13 +58,13 @@ https://templatemo.com/tm-539-simple-house
 			<div class="tm-container-inner tm-persons">
 				<div class="row">
 					{% for employe in employes %}
-						<article class="col-lg-6" >
+						<article class="col-lg-6">
 							<figure class="tm-person">
 								<img src="/static/img/{{employe.image}}" alt="Image" class="img-fluid tm-person-img" />
-								<figcaption class="tm-person-description">
+								<figcaption class="tm-person-description" style="height : 250px">
 									<h4 class="tm-person-name">{{employe.nom}} {{employe.prenom}}</h4>
 									<p class="tm-person-title">{{employe.statut}}</p>
-									<p class="tm-person-about">{{employe.description}}</p>
+									<p class="tm-person-about" style="height : 80px">{{employe.description}}</p>
 									<div>
 										{% if employe.facebook %}
 											<a href="{{employe.facebook}}"  class="tm-social-link">
