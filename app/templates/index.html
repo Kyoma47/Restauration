@@ -9,11 +9,16 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
 	<link href="/static/css/templatemo-style.css" rel="stylesheet" />
 
-	<!-- bootstrap -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
 	<!-- font-awesome -->
 	<link rel="stylesheet" href="/static/css/font-awesome-4.7.0/css/font-awesome.min.css">
+
+	<style type="text/css">
+		.ombre {
+			-moz-box-shadow: 	  3px 3px 5px 1px #ccc;
+			-webkit-box-shadow: 3px 3px 5px 1px #ccc;
+			box-shadow: 				3px 3px 5px 1px #ccc;
+		}
+	</style>
 </head>
 <!--
 
@@ -34,8 +39,8 @@ https://templatemo.com/tm-539-simple-house
 						<div class="col-md-6 col-12">
 							<img src="/static/img/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
 							<div class="tm-site-text-box">
-								<h1 class="tm-site-title">Mon Resaurant</h1>
-								<h6 class="tm-site-description">adresse de mon restaurant</h6>
+								<h1 class="tm-site-title">Notre Restaurant</h1>
+								<h6 class="tm-site-description">adresse de notre restaurant</h6>
 							</div>
 						</div>
 						<nav class="col-md-6 col-12 tm-nav">
@@ -52,8 +57,13 @@ https://templatemo.com/tm-539-simple-house
 
 		<main>
 			<header class="row tm-welcome-section">
-				<h2 class="col-12 text-center tm-section-title">Bienvenu dans Mon Restaurant</h2>
-				<p class="col-12 text-center">Des plats pour tous les goûts : du salé, sucré, épicé, sucré-salé.</p>
+				<h2 class="col-12 text-center tm-section-title">Bienvenu dans Notre Restaurant</h2>
+				<p class="col-12 text-center">
+					Des plats pour tous les goûts : du salé, sucré, épicé, sucré-salé.
+				</p>
+				<p class="col-12 text-center">
+					Tout le travail est réalisé par une équipe culinaire qualifiée et expérimentée dont chaque membre a été sélectionné personnellement pour son poste.
+				</p>
 			</header>
 
 			<div class="tm-paging-links">
@@ -76,22 +86,18 @@ https://templatemo.com/tm-539-simple-house
 				{% for categorie in categories %}
 					<div id="tm-gallery-page-{{categorie.nom.lower()}}" class="tm-gallery-page">
 						{% for produit in categorie.produits %}
-							<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item" style="-moz-box-shadow:    3px 3px 5px 6px #ccc;
-  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-  box-shadow:         3px 3px 5px 6px #ccc; margin:12px;">
-								<figure style="height:35em;">
-									<img src="/static/img/gallery/{{categorie.galerie}}/{{produit.image}}" alt="Image"
-											class="img-fluid tm-gallery-img" style="width:250px; height:250px;"/>
-									<figcaption style="height:250px;">
+							<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item ombre">
+								<figure style="width: 250px; height:30em; margin-top:20px;" > <!-- border: solid blue  1px;" -->
+									<img src="/static/img/gallery/{{categorie.galerie}}/{{produit.image}}" alt="Image" class="img-fluid tm-gallery-img" style="width:250px; height:250px;"/>
+									<figcaption style="height:250px;"> <!-- border: solid red 1px; -->
 										<h4 class="tm-gallery-title">{{produit.titre}}</h4>
-										<p class="tm-gallery-description" style="height: 150px;">{{produit.description}}</p>
-										<div style="height: 50px;">
-											<button type="button" class="btn btn-outline-success" style="float:right;">
-												<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-												&nbsp;	Acheter
-											</button>
-											<p class="tm-gallery-price">	{{produit.prix}} Dh</p>
-										</div>
+										<p class="tm-gallery-description" style="height: 120px;">{{produit.description}}</p>
+
+										<a href="/a-propos" class="tm-btn tm-btn-success tm-right" style="padding:9px; float:right;">
+											<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp;
+											Commander
+										</a>
+										<p class="tm-gallery-price">	{{produit.prix}} Dh</p>
 										<!-- CSS only -->
 									</figcaption>
 								</figure>
