@@ -38,6 +38,14 @@ https://templatemo.com/tm-539-simple-house
 								<li class="tm-nav-li"><a href="/" 				class="tm-nav-link">       Accueil </a></li>
 								<li class="tm-nav-li"><a href="/a-propos" class="tm-nav-link active">A propos</a></li>
 								<li class="tm-nav-li"><a href="/contact"  class="tm-nav-link">			 Contact </a></li>
+
+								{% set produits = 4 %}
+								<li class="tm-nav-li">
+									<a href="/panier" class="tm-nav-link">
+										<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp;
+										Panier ({{produits}})
+									</a>
+								</li>
 							</ul>
 						</nav>
 					</div>
@@ -142,7 +150,7 @@ https://templatemo.com/tm-539-simple-house
 						<div class="tm-history-inner">
 							<img src="/static/img/about-06.jpg" alt="Image" class="img-fluid tm-history-img" />
 							<div class="tm-history-text">
-								<h4 class="tm-history-title">History of our restaurant</h4>
+								<h4 class="tm-history-title">Histoire de Notre Restaurant</h4>
 								<p class="tm-mb-p">
 									Le plus vieux restaurant de la ville, depuis les années 60 rien n'a changé, le service est toujours de qualité.
 								</p>
