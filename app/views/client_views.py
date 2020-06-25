@@ -15,10 +15,6 @@ def about():
 def contact():
     return render_template("contact.html")
 
-@app.route('/cart')
-def cart():
-    return render_template("nav-cart.html")
-
 @app.route('/panier')
 def panier():
     return render_template("panier.html")

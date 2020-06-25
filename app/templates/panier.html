@@ -1,157 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="utf-8">
-    <!--  This file has been downloaded from https://bootdey.com  -->
-    <!--  All snippets are MIT license https://bootdey.com/license -->
-    <title>Bootdey.com</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-    	body{
-    margin-top:20px;
-    background:#eee;
-}
-.ui-w-40 {
-    width: 40px !important;
-    height: auto;
-}
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Restaurant - Nom du restaurant</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+	<link href="/static/css/templatemo-style.css" rel="stylesheet" />
 
-.card{
-    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);    
-}
+	<!-- font-awesome -->
+	<link rel="stylesheet" href="/static/css/font-awesome-4.7.0/css/font-awesome.min.css">
 
-.ui-product-color {
-    display: inline-block;
-    overflow: hidden;
-    margin: .144em;
-    width: .875rem;
-    height: .875rem;
-    border-radius: 10rem;
-    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
-    vertical-align: middle;
-}
-    </style>
+	<style type="text/css">
+		.ombre {
+			-moz-box-shadow: 3px 3px 5px 0.2px #ccc;
+			-webkit-box-shadow: 3px 3px 5px 0.2px #ccc;
+			box-shadow: 3px 3px 5px 0.2px #ccc;
+		}
+	</style>
+
+
 </head>
-<body>
-<div class="container px-3 my-5 clearfix">
-    <!-- Shopping cart table -->
-    <div class="card">
-        <div class="card-header">
-            <h2>Shopping Cart</h2>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered m-0">
-                <thead>
-                  <tr>
-                    <!-- Set columns width -->
-                    <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
-                    <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
-                    <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
-                    <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
-                    <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
-                  </tr>
-                </thead>
-                <tbody>
-        
-                  <tr>
-                    <td class="p-4">
-                      <div class="media align-items-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                        <div class="media-body">
-                          <a href="#" class="d-block text-dark">Product 1</a>
-                          <small>
-                            <span class="text-muted">Color:</span>
-                            <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#e81e2c;"></span> &nbsp;
-                            <span class="text-muted">Size: </span> EU 37 &nbsp;
-                            <span class="text-muted">Ships from: </span> China
-                          </small>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right font-weight-semibold align-middle p-4">$57.55</td>
-                    <td class="align-middle p-4"><input type="text" class="form-control text-center" value="2"></td>
-                    <td class="text-right font-weight-semibold align-middle p-4">$115.1</td>
-                    <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                  </tr>
-        
-                  <tr>
-                    <td class="p-4">
-                      <div class="media align-items-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                        <div class="media-body">
-                          <a href="#" class="d-block text-dark">Product 2</a>
-                          <small>
-                            <span class="text-muted">Color:</span>
-                            <span class="ui-product-color ui-product-color-sm align-text-bottom" style="background:#000;"></span> &nbsp;
-                            <span class="text-muted">Storage: </span> 32GB &nbsp;
-                            <span class="text-muted">Warranty: </span> Standard - 1 year &nbsp;
-                            <span class="text-muted">Ships from: </span> China
-                          </small>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
-                    <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                    <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
-                    <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                  </tr>
-        
-                  <tr>
-                    <td class="p-4">
-                      <div class="media align-items-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                        <div class="media-body">
-                          <a href="#" class="d-block text-dark">Product 3</a>
-                          <small>
-                            <span class="text-muted">Ships from: </span> Germany
-                          </small>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                    <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                    <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                    <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                  </tr>
-        
-                </tbody>
-              </table>
-            </div>
-            <!-- / Shopping cart table -->
-        
-            <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-              <div class="mt-4">
-                <label class="text-muted font-weight-normal">Promocode</label>
-                <input type="text" placeholder="ABC" class="form-control">
-              </div>
-              <div class="d-flex">
-                <div class="text-right mt-4 mr-5">
-                  <label class="text-muted font-weight-normal m-0">Discount</label>
-                  <div class="text-large"><strong>$20</strong></div>
-                </div>
-                <div class="text-right mt-4">
-                  <label class="text-muted font-weight-normal m-0">Total price</label>
-                  <div class="text-large"><strong>$1164.65</strong></div>
-                </div>
-              </div>
-            </div>
-        
-            <div class="float-right">
-              <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
-              <button type="button" class="btn btn-lg btn-primary mt-2">Checkout</button>
-            </div>
-        
-          </div>
-      </div>
-  </div>
+<!--
 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	
-</script>
+Simple House
+
+https://templatemo.com/tm-539-simple-house
+
+-->
+
+<body>
+
+	<div class="container-fluid p-10" style="min-width: 50em;">
+		<!-- Top box -->
+
+		<!-- Logo & Site Name -->
+		<div class="placeholder">
+			<div class="parallax-window" data-parallax="scroll" data-image-src="/static/img/simple-house-01.jpg" style="max-height:">
+				<div class="tm-header">
+					<div class="row tm-header-inner">
+						<div class="col-md-6 col-12">
+							<img src="/static/img/simple-house-logo.png" alt="Logo" class="tm-site-logo" />
+							<div class="tm-site-text-box">
+								<h1 class="tm-site-title">Notre Restaurant</h1>
+								<h6 class="tm-site-description">adresse de notre restaurant</h6>
+							</div>
+						</div>
+						<nav class="col-md-6 col-12 tm-nav">
+							<ul class="tm-nav-ul">
+								<li class="tm-nav-li"><a href="/" class="tm-nav-link active">Accueil </a></li>
+								<li class="tm-nav-li"><a href="/a-propos" class="tm-nav-link">A Propos</a></li>
+								<li class="tm-nav-li"><a href="/contact" class="tm-nav-link">Contact </a></li>
+
+								{% set produits = 4 %}
+								<li class="tm-nav-li">
+									<a href="/panier" class="tm-nav-link">
+										<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp;
+										Panier ({{produits}})
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<main>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+			<link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+			<style type="text/css">
+				body{
+					/*
+	        margin-top:20px;
+					*/
+	        background:#eee;
+	      }
+	      .ui-w-40 {
+	          width: 40px !important;
+	          height: auto;
+	      }
+
+	      .card{
+	          box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
+	      }
+
+	      .ui-product-color {
+	          display: inline-block;
+	          overflow: hidden;
+	          margin: .144em;
+	          width: .875rem;
+	          height: .875rem;
+	          border-radius: 10rem;
+	          -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+	          box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+	          vertical-align: middle;
+	      }
+	    </style>
+			<div class="card">
+	      <div class="card-header">
+	        <h2>Panier</h2>
+	      </div>
+	      <div class="card-body">
+	        <div class="table-responsive">
+	          <table class="table table-bordered m-0">
+	            <thead>
+	              <tr>
+	                <!-- Set columns width -->
+	                <th class="text-center py-3 px-4" style="min-width: 300px; max-height:300px;">Commandes</th>
+									<!--
+									<th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
+									-->
+	                <th class="text-center py-3 px-4" style="width: 150px;">Prix</th>
+									<!--
+									<th class="text-center py-3 px-4" style="width: 100px;">Quantité</th>
+	                <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
+								-->
+	                <th class="text-center align-middle py-3 px-0" style="width: 40px;">
+										<a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a>
+									</th>
+	              </tr>
+	            </thead>
+	            <tbody>
+								{% for i in range( 4 ) %}
+	              <tr>
+	                <td class="p-2">
+	                  <div class="media align-items-center ombre" style="min-width: 350px;">
+	                    <div class="media-body">
+												<img src="/static/img/gallery/pizza/mini-pizza.jpeg" alt="" style="float: left; margin-right:10px; width:150px; height:100px;" >
+												<a href="#" class="d-block text-dark">Titre de la commande </a>
+												<small>
+													<p>
+														Description du menu Lorem ipsum dolor sit amet,
+														consectetur adipisicing elit,
+														sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+													</p>
+												</small>
+												<table class="table table-bordered m-0">
+													{% for i in range(range(0,3)| random) %}
+													<tr>
+													 <td class="p-2" style="min-width: 300px;">
+														 <img src="/static/img/gallery/plats/03.jpg" alt="" style="width:70px; height:70px; float:left; margin-right:10px">
+														 <div class="media align-items-center"> <!-- style="border:solid red 1px;"  -->
+															 <div class="media-body">
+																 <a href="#" class="d-block text-dark">Titre du plat</a>
+																 <small>
+																	 <span class="text-muted">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+																 </small>
+															 </div>
+														 </div>
+													 </td>
+													 <td class="p-3" style="width:70px">
+														 Quantité :&nbsp;
+														 <input type="number" class="text-center" value="2" 	style="width: 100px;">
+													 </td>
+													 <td class="text-right font-weight-semibold align-middle p-3" style="width: 70px">157.55 DH</td>
+												 	</tr>
+													{% endfor %}
+												</table>
+	                    </div>
+	                  </div>
+	                </td>
+	                <td class="text-right font-weight-semibold align-middle p-4">57.55 DH</td>
+									<!--
+	                <td class="align-middle p-4"><input type="number" class="form-control text-center" value="2"></td>
+								 <td class="text-right font-weight-semibold align-middle p-4">115.1 DH</td>
+								-->
+	                <td class="text-center align-middle px-0">
+										<a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">
+											<i class="fa fa-trash" aria-hidden="true" style="margin: 10px;"></i>
+										</a>
+									</td>
+	              </tr>
+								{% endfor %}
+
+	            </tbody>
+	          </table>
+	        </div>
+	        <!-- / Shopping cart table -->
+
+	        <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
+	          <div class="mt-4">
+	            <label class="text-muted font-weight-normal">Promocode</label>
+	            <input type="text" placeholder="ABC" class="form-control">
+	          </div>
+	          <div class="d-flex">
+	            <div class="text-right mt-4 mr-5">
+	              <label class="text-muted font-weight-normal m-0">Remise</label>
+	              <div class="text-large"><strong>20 DH</strong></div>
+	            </div>
+	            <div class="text-right mt-4">
+	              <label class="text-muted font-weight-normal m-0">Prix Total</label>
+	              <div class="text-large"><strong>1164.65 DH</strong></div>
+	            </div>
+	          </div>
+	        </div>
+
+	        <div class="float-right">
+	          <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">
+							Retour au Menu
+						</button>
+	          <button type="button" class="btn btn-lg btn-primary mt-2">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; Payer
+						</button>
+	        </div>
+
+	      </div>
+	    </div>
+		</main>
+
+		<footer class="tm-footer text-center">
+			<p>Copyright &copy; 2020 Simple House
+
+				| Design: <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
+		</footer>
+	</div>
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/parallax.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+
+  </script>
 </body>
+
 </html>
