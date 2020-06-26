@@ -7,16 +7,20 @@ DELETE FROM TPLATS_MENUS ;
 
 DECLARE @friture int, @regime int, @tacos int, @pizza int ;
 
-INSERT INTO TMENUS(image, menu, description) VALUES('Menu Friture', 'Composé de plusieurs élements frits variées...');
+INSERT INTO TMENUS(image, menu, description) VALUES('menu-fritures.jpg','Menu Friture',
+  'Composé de plusieurs élements frits variées...');
 SET @friture= (SELECT SCOPE_IDENTITY());
 
-INSERT INTO TMENUS(image, menu, description) VALUES('Menu Régime' , 'Un repas leger pour garder la forme :)');
+INSERT INTO TMENUS(image, menu, description) VALUES('menu-regime.jpg','Menu Régime',
+  'Un repas leger pour garder la forme :)');
 SET @regime = (SELECT SCOPE_IDENTITY());
 
-INSERT INTO TMENUS(image, menu, description) VALUES('Menu Tacos'  , 'Tacos viande hachée au choix avec des frites et d''une cannette Coca-Cola.');
+INSERT INTO TMENUS(image, menu, description) VALUES('menu-tacos.jpg','Menu Tacos',
+  'Tacos viande hachée au choix avec des frites et d''une cannette Coca-Cola.');
 SET @tacos  = (SELECT SCOPE_IDENTITY());
 
-INSERT INTO TMENUS(image, menu, description) VALUES('Menu Pizza'  , 'Pizza au choix accompagnée d''une salade et d''une cannette Coca-Cola.');
+INSERT INTO TMENUS(image, menu, description) VALUES('menu-pizza','Menu Pizza',
+  'Pizza au choix accompagnée d''une salade et d''une cannette Coca-Cola.');
 SET @pizza  = (SELECT SCOPE_IDENTITY());
 
 
