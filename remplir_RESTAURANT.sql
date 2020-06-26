@@ -168,8 +168,8 @@ VALUES('.jpeg', 'Tacos Cordon Bleu', @idCategorie, 38, 1,
 
 
 INSERT INTO MENU(menu, description) VALUES('Menu Pêcheur', '');
-INSERT INTO MENU(menu, description) VALUES('Menu Pêcheur', '');
-INSERT INTO MENU(menu, description) VALUES('Menu Pêcheur', '');
+INSERT INTO MENU(menu, description) VALUES('Menu Fermier', '');
+INSERT INTO MENU(menu, description) VALUES('Menu Tacos', '');
 INSERT INTO MENU(menu, description) VALUES('Menu Pêcheur', '');
 
 Menus :
