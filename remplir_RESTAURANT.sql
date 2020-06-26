@@ -3,24 +3,20 @@ DELETE FROM TCATEGORIES ;
 DELETE FROM TPLATS ;
 DELETE FROM TPLATS_MENUS ;
 
-SELECT * FROM TMENUS ;
-SELECT * FROM TCATEGORIES ;
-SELECT * FROM TPLATS_MENUS ;
-SELECT * FROM TPLATS ;
 
 
 DECLARE @friture int, @regime int, @tacos int, @pizza int ;
 
-INSERT INTO TMENUS(menu, description) VALUES('Menu Friture', 'Composé de plusieurs élements frits variées...');
+INSERT INTO TMENUS(image, menu, description) VALUES('Menu Friture', 'Composé de plusieurs élements frits variées...');
 SET @friture= (SELECT SCOPE_IDENTITY());
 
-INSERT INTO TMENUS(menu, description) VALUES('Menu Régime' , 'Un repas leger pour garder la forme :)');
+INSERT INTO TMENUS(image, menu, description) VALUES('Menu Régime' , 'Un repas leger pour garder la forme :)');
 SET @regime = (SELECT SCOPE_IDENTITY());
 
-INSERT INTO TMENUS(menu, description) VALUES('Menu Tacos'  , 'Tacos viande hachée au choix avec des frites et d''une cannette Coca-Cola.');
+INSERT INTO TMENUS(image, menu, description) VALUES('Menu Tacos'  , 'Tacos viande hachée au choix avec des frites et d''une cannette Coca-Cola.');
 SET @tacos  = (SELECT SCOPE_IDENTITY());
 
-INSERT INTO TMENUS(menu, description) VALUES('Menu Pizza'  , 'Pizza au choix accompagnée d''une salade et d''une cannette Coca-Cola.');
+INSERT INTO TMENUS(image, menu, description) VALUES('Menu Pizza'  , 'Pizza au choix accompagnée d''une salade et d''une cannette Coca-Cola.');
 SET @pizza  = (SELECT SCOPE_IDENTITY());
 
 
