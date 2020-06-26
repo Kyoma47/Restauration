@@ -3,6 +3,7 @@ DELETE FROM TCATEGORIES ;
 DELETE FROM TPLATS ;
 DELETE FROM TPLATS_MENUS ;
 
+ALTER TABLE Image ADD adresse_rue VARCHAR(255)
 
 
 DECLARE @friture int, @regime int, @tacos int, @pizza int ;

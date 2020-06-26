@@ -3,6 +3,8 @@ from flask import Flask, request, render_template
 
 from app.classes import *
 
+
+
 @app.route('/')
 def accueil():
     return render_template("index.html", categories=categories)
