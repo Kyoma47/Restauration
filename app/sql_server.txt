@@ -1,0 +1,1 @@
+Driver={SQL Server};Server=DESKTOP-5CJ5JOC\SQLEXPRESS;Database=CopieRestaurant;Trusted_Connection=yes;

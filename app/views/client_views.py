@@ -2,7 +2,7 @@ from app import app
 
 from flask import Flask, request, render_template
 
-from app.sql_server import read_sql_server
+from app.lecture_db import read_sql_server
 
 class Employe:
     def __init__(self, prenom, nom, image, statut, desctiption="",

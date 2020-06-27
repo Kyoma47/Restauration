@@ -1,28 +1,6 @@
 import pyodbc
-import random
 
-def read_sql_server(table_name):
-    print(f"read ! {table_name}...")
-    liste = []
-    with connection.cursor() as cursor:
-        cursor.execute(f"SELECT * FROM {table_name}")
-        for row in cursor :
-            test = table_name.capitalize()
-            if test == "Tcategories" : objet= Categorie(*row)
-            if test == "Tplats_menus": objet= Plat_Menu(*row)
-            if test == "Tplats": objet= Plat(*row)
-            if test == "Tmenus": objet= Menu(*row)
-            liste.append(objet)
-    return liste
-
-
-connection = pyodbc.connect(
-    "Driver={SQL Server};"               #Driver={SQL Server};
-    "Server=DESKTOP-5CJ5JOC\SQLEXPRESS;" #Server=DESKTOP-5CJ5JOC\SQLEXPRESS;
-    "Database=CopieRestaurant;"          #Database=NomBase;
-    "Trusted_Connection=yes;"
-)
-
+connection = pyodbc.connect( open("app/sql_server.txt").read() )
 
 class Categorie:
     def __init__(self, id, categorie):
@@ -30,7 +8,8 @@ class Categorie:
         self.categorie    = categorie
 
     def safe_name(self):
-        return "".join([c for c in self.categorie if c.isalpha() or c.isdigit()]).rstrip()
+        chars = [c for c in self.categorie if c.isalpha() or c.isdigit()]
+        return "".join(chars).rstrip().lower()
 
     def plats(self):
         with connection.cursor() as cursor:
@@ -74,7 +53,16 @@ class Plat_Menu :
 
 
 
-
-#print( read_plat("TPLATS") )
-#print( read_plat("TMENUS") )
-#print( read_plat("TPLATS_MENUS") )
+def read_sql_server(table_name):
+    print(f"read ! {table_name}...")
+    liste = []
+    with connection.cursor() as cursor:
+        cursor.execute(f"SELECT * FROM {table_name}")
+        for row in cursor :
+            test = table_name.capitalize()
+            if test == "Tcategories" : objet= Categorie(*row)
+            if test == "Tplats_menus": objet= Plat_Menu(*row)
+            if test == "Tplats": objet= Plat(*row)
+            if test == "Tmenus": objet= Menu(*row)
+            liste.append(objet)
+    return liste
