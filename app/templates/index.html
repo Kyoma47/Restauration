@@ -78,12 +78,13 @@ https://templatemo.com/tm-539-simple-house
 			<div class="tm-paging-links">
 				<nav>
 					<ul>
-						{% for i in range(categories|length) %}
-						<li id="categorie{{i}}" class="tm-paging-item">
-							<a href="#" class="tm-paging-link{% if i==0 %} active{% endif %}">
-								{{categories[i].categorie}}
-							</a>
+						<li class="tm-paging-item">
+							<a href="#" class="tm-paging-link active"> Menu </a>
 						</li>
+						{% for i in range(categories|length) %}
+							<li class="tm-paging-item">
+								<a href="#" class="tm-paging-link">{{categories[i].categorie}}</a>
+							</li>
 						{% endfor %}
 					</ul>
 				</nav>
@@ -91,7 +92,24 @@ https://templatemo.com/tm-539-simple-house
 
 			<!-- Gallery -->
 			<div class="row tm-gallery">
-
+				<div id="tm-gallery-page-menu" class="tm-gallery-page">
+					{% for produit in menus %}
+					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item ombre">
+						<figure style="width: 250px; height:30em; margin-top:20px;">
+							<img src="/static/img/gallery/menu/{{produit.image}}" alt="{{produit.image}}" class="img-fluid tm-gallery-img" style="width:250px; height:250px;" />
+							<figcaption style="height:250px;">
+								<h4 class="tm-gallery-title">{{produit.menu}}</h4>
+								<p class="tm-gallery-description" style="height:120px;">{{produit.description}}</p>
+								<a href="/a-propos" class="tm-btn tm-btn-success tm-right" style="padding:9px; float:right;">
+									<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; Commander
+								</a>
+								<p class="tm-gallery-price"> {{produit.prix()}} Dh</p>
+								<!-- CSS only -->
+							</figcaption>
+						</figure>
+					</article>
+					{% endfor %}
+				</div>
 				{% for categorie in categories %}
 				<div id="tm-gallery-page-{{categorie.safe_name().lower()}}" class="tm-gallery-page">
 					{% for produit in categorie.plats() %}
@@ -102,7 +120,7 @@ https://templatemo.com/tm-539-simple-house
 							<figcaption style="height:250px;">
 								<!-- border: solid red 1px; -->
 								<h4 class="tm-gallery-title">{{produit.plat}}</h4>
-								<p class="tm-gallery-description" style="height: 120px;">{{produit.description}}</p>
+								<p class="tm-gallery-description" style="height:120px;">{{produit.description}}</p>
 
 								<a href="/a-propos" class="tm-btn tm-btn-success tm-right" style="padding:9px; float:right;">
 									<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp;
@@ -116,6 +134,8 @@ https://templatemo.com/tm-539-simple-house
 					{% endfor %}
 				</div>
 				{% endfor %}
+
+
 			</div>
 			<div class="tm-section tm-container-inner">
 				<div class="row">

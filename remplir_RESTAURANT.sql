@@ -3,9 +3,8 @@ DELETE FROM TCATEGORIES ;
 DELETE FROM TPLATS ;
 DELETE FROM TPLATS_MENUS ;
 
-ALTER TABLE TPLATS ADD Image VARCHAR(30)
-ALTER TABLE TMENUS ADD Image VARCHAR(30)
-
+--ALTER TABLE TPLATS ADD Image VARCHAR(30) NULL;
+--ALTER TABLE TMENUS ADD Image VARCHAR(30) NULL;
 
 DECLARE @friture int, @regime int, @tacos int, @pizza int ;
 
@@ -21,15 +20,13 @@ INSERT INTO TMENUS(image, menu, description) VALUES('menu-tacos.jpg','Menu Tacos
   'Tacos viande hachée au choix avec des frites et d''une cannette Coca-Cola.');
 SET @tacos  = (SELECT SCOPE_IDENTITY());
 
-INSERT INTO TMENUS(image, menu, description) VALUES('menu-pizza','Menu Pizza',
+INSERT INTO TMENUS(image, menu, description) VALUES('menu-pizza.jpg','Menu Pizza',
   'Pizza au choix accompagnée d''une salade et d''une cannette Coca-Cola.');
 SET @pizza  = (SELECT SCOPE_IDENTITY());
 
 
 
 DECLARE @idCategorie int, @idPlat int;
-INSERT INTO TCATEGORIES(categorie) VALUES('Menu');
-SET @idCategorie = (SELECT SCOPE_IDENTITY());
 
 INSERT INTO TCATEGORIES(categorie) VALUES('Pizza');
 SET @idCategorie = (SELECT SCOPE_IDENTITY());
@@ -90,9 +87,9 @@ SET @idCategorie = (SELECT SCOPE_IDENTITY());
 
 INSERT INTO TCATEGORIES(categorie) VALUES('Tacos');
 SET @idCategorie = (SELECT SCOPE_IDENTITY());
-  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('.jpeg', 'Tacos poulet', @idCategorie, 30, 1, 'Délicieux tacos au poulet parfume au curcuma et une pointe de curry');
-  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('.jpeg', 'Tacos viande hachée', @idCategorie, 35, 1, 'Tacos généreusement garnis d''un mélange viande hachée + frites maison, le tout nappé d''une sauce au choix');
-  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('.jpeg', 'Tacos Cordon Bleu', @idCategorie, 38, 1, 'Tacos cordon bleu sauce gruyère au curry.');
+  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('tacos-poulet-curry.jpeg', 'Tacos poulet', @idCategorie, 30, 1, 'Délicieux tacos au poulet parfume au curcuma et une pointe de curry');
+  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('tacos-viande-hachee.jpg', 'Tacos viande hachée', @idCategorie, 35, 1, 'Tacos généreusement garnis d''un mélange viande hachée + frites maison, le tout nappé d''une sauce au choix');
+  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('tacos-cordon-bleu.jpg',   'Tacos Cordon Bleu', @idCategorie, 38, 1, 'Tacos cordon bleu sauce gruyère au curry.');
   SET @idPlat = (SELECT SCOPE_IDENTITY());
     INSERT INTO TPLATS_MENUS(IdMenu, IdPlat, Qt, Remise) VALUES(@tacos, @idPlat, 1, 10);
 

@@ -8,12 +8,13 @@ def read_sql_server(table_name):
         cursor.execute(f"SELECT * FROM {table_name}")
         for row in cursor :
             test = table_name.capitalize()
-            if test == "Tcategories" : liste.append( Categorie(*row) )
-            if test == "Tplats_menus": print( Plat_Menu(*row) )
-            if test == "Tplats": liste.append( Plat(*row) )
-            if test == "Tmenus": print( Menu(*row).menu )
-            #liste.append( classe(*row) )
+            if test == "Tcategories" : objet= Categorie(*row)
+            if test == "Tplats_menus": objet= Plat_Menu(*row)
+            if test == "Tplats": objet= Plat(*row)
+            if test == "Tmenus": objet= Menu(*row)
+            liste.append(objet)
     return liste
+
 
 connection = pyodbc.connect(
     "Driver={SQL Server};"               #Driver={SQL Server};
@@ -21,6 +22,7 @@ connection = pyodbc.connect(
     "Database=CopieRestaurant;"          #Database=NomBase;
     "Trusted_Connection=yes;"
 )
+
 
 class Categorie:
     def __init__(self, id, categorie):
@@ -52,6 +54,10 @@ class Menu :
         self.id = id
         self.menu = menu
         self.image = image
+        self.description = description
+
+    def prix(self):
+        return 0.0
 
     def plats(self):
         with connection.cursor() as cursor:
@@ -67,37 +73,7 @@ class Plat_Menu :
         self.remise  = remise
 
 
-class Employe:
-    def __init__(self, prenom, nom, image, statut, desctiption="",
-        facebook  = "https//facebook.com",
-        twitter   = "https//twitter.com",
-        instagram = "https//instagram.com",
-        youtube   = "https://youtube.com"
-    ):
-        self.nom    = nom
-        self.prenom = prenom
-        self.image  = image
-        self.statut = statut
-        self.description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        #self.description = description
-        self.facebook  = facebook
-        self.twitter   = twitter
-        self.instagram = instagram
-        self.youtube   = youtube
 
-employes = [
-    Employe("Jennifer", "Soft",
-    "about-01.jpg", "Fondateur CEO", youtube=None),
-
-    Employe("Daisy", "Walker",
-    "about-02.jpg", "Chef d'executuion", twitter=None, youtube=None),
-
-    Employe("Florence", "Nelson",
-    "about-03.jpg", "Manager de cuisine", twitter=None),
-
-    Employe("Valentina", "Martin",
-    "about-04.jpg", "Directeur Culinaire")
-]
 
 #print( read_plat("TPLATS") )
 #print( read_plat("TMENUS") )
