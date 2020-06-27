@@ -81,7 +81,7 @@ https://templatemo.com/tm-539-simple-house
 						{% for i in range(categories|length) %}
 						<li id="categorie{{i}}" class="tm-paging-item">
 							<a href="#" class="tm-paging-link{% if i==0 %} active{% endif %}">
-								{{categories[i].nom}}
+								{{categories[i].categorie}}
 							</a>
 						</li>
 						{% endfor %}
@@ -93,15 +93,15 @@ https://templatemo.com/tm-539-simple-house
 			<div class="row tm-gallery">
 
 				{% for categorie in categories %}
-				<div id="tm-gallery-page-{{categorie.nom.lower()}}" class="tm-gallery-page">
-					{% for produit in categorie.produits %}
+				<div id="tm-gallery-page-{{categorie.safe_name().lower()}}" class="tm-gallery-page">
+					{% for produit in categorie.plats() %}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item ombre">
 						<figure style="width: 250px; height:30em; margin-top:20px;">
 							<!-- border: solid blue  1px;" -->
-							<img src="/static/img/gallery/{{categorie.galerie}}/{{produit.image}}" alt="Image" class="img-fluid tm-gallery-img" style="width:250px; height:250px;" />
+							<img src="/static/img/gallery/{{categorie.safe_name()}}/{{produit.image}}" alt="{{produit.image}}" class="img-fluid tm-gallery-img" style="width:250px; height:250px;" />
 							<figcaption style="height:250px;">
 								<!-- border: solid red 1px; -->
-								<h4 class="tm-gallery-title">{{produit.titre}}</h4>
+								<h4 class="tm-gallery-title">{{produit.plat}}</h4>
 								<p class="tm-gallery-description" style="height: 120px;">{{produit.description}}</p>
 
 								<a href="/a-propos" class="tm-btn tm-btn-success tm-right" style="padding:9px; float:right;">
@@ -160,7 +160,7 @@ https://templatemo.com/tm-539-simple-house
 				e.preventDefault();
 
 				var page = $(this).text().toLowerCase().replace(/^\s+|\s+$/g, '');
-				//console.log("page : '"+page+"'");
+				console.log("page : '"+page+"'");
 				$('.tm-gallery-page').addClass('hidden');
 				$('#tm-gallery-page-' + page).removeClass('hidden');
 				$('.tm-paging-link').removeClass('active');

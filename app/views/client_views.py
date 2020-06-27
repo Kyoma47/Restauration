@@ -1,13 +1,12 @@
 from app import app
 from flask import Flask, request, render_template
 
-from app.classes import *
 
-
+from app.sql_server import read_sql_server
 
 @app.route('/')
 def accueil():
-    return render_template("index.html", categories=categories)
+    return render_template("index.html", categories=read_sql_server("TCATEGORIES"))
 
 @app.route('/a-propos')
 def about():

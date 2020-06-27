@@ -3,7 +3,8 @@ DELETE FROM TCATEGORIES ;
 DELETE FROM TPLATS ;
 DELETE FROM TPLATS_MENUS ;
 
-ALTER TABLE Image ADD adresse_rue VARCHAR(255)
+ALTER TABLE TPLATS ADD Image VARCHAR(30)
+ALTER TABLE TMENUS ADD Image VARCHAR(30)
 
 
 DECLARE @friture int, @regime int, @tacos int, @pizza int ;
@@ -42,8 +43,8 @@ SET @idCategorie = (SELECT SCOPE_IDENTITY());
 INSERT INTO TCATEGORIES(categorie) VALUES('Boisson');
 SET @idCategorie = (SELECT SCOPE_IDENTITY());
   INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('pepsi.jpeg', 'Pepsi Cola', @idCategorie, 13.5, 0, 'Cannette de la boisson gazeuse Pepsi-Cola.');
-  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('.jpeg', 'Eau gazeuse', @idCategorie, 12, 0, 'Eau dans laquelle plusieurs gaz se trouvent dissous par une action naturelle.');
-  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('tartare.jpeg', 'Eau minérale', @idCategorie, 15, 1, 'Eau provenant d''une nappe souterraine et contenant des matières minérales.');
+  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('eau-gazeuse.jpeg', 'Eau gazeuse', @idCategorie, 12, 0, 'Eau dans laquelle plusieurs gaz se trouvent dissous par une action naturelle.');
+  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('eau-minerale.jpeg', 'Eau minérale', @idCategorie, 15, 1, 'Eau provenant d''une nappe souterraine et contenant des matières minérales.');
 --
   INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('jus_fruit.jpeg', 'Jus de fruits', @idCategorie, 20.5, 1, 'Jus obtenue à partir de fruits au choix : Orange, Citron, Pommes...');
   SET @idPlat = (SELECT SCOPE_IDENTITY());
@@ -61,7 +62,7 @@ SET @idCategorie = (SELECT SCOPE_IDENTITY());
   SET @idPlat = (SELECT SCOPE_IDENTITY());
     INSERT INTO TPLATS_MENUS(IdMenu, IdPlat, Qt, Remise) VALUES(@friture, @idPlat, 1, 6);
 --
-  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('.jpeg', 'Nuggets', @idCategorie, 20, 0, 'Une pâte de chair et de peau de poulet finement hachées, qui est ensuite roulée dans une pâte à beignets ou une panure avant cuisson.');
+  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('nuggets.jpg', 'Nuggets', @idCategorie, 20, 0, 'Une pâte de chair et de peau de poulet finement hachées, qui est ensuite roulée dans une pâte à beignets ou une panure avant cuisson.');
   SET @idPlat = (SELECT SCOPE_IDENTITY());
     INSERT INTO TPLATS_MENUS(IdMenu, IdPlat, Qt, Remise) VALUES(@friture, @idPlat, 1, 6);
 --
@@ -99,8 +100,8 @@ SET @idCategorie = (SELECT SCOPE_IDENTITY());
 INSERT INTO TCATEGORIES(categorie) VALUES('Plat'); SET @idCategorie = (SELECT SCOPE_IDENTITY());
 INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('poulet.jpg', 'Plat poulet', @idCategorie, 20.75, 0, 'Préparation escabèche de poulet fermier pour un plat épicé, complet et gourmand.');
 INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('carbonara.jpg', 'Pâtes Carbonara', @idCategorie, 32.5, 0, 'Pâtes longues et fines. avec des œufs, des lardons, du fromage de brebis sec et du poivre noir fraîchement moulu.');
-INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('boulettes.jpg', 'Boulettes viande hachée', @idCategorie, 23, 0, 'De la viande en boulettes préparées à partir de bœuf.');
-INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('tartare.jpeg', 'Tartare saumon', @idCategorie, 28.5, 0, 'un plat de la cuisine française, reprenant le principe du steak tartare, mais en l''appliquant au saumon.');
+INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('boulette.jpg', 'Boulettes viande hachée', @idCategorie, 23, 0, 'De la viande en boulettes préparées à partir de bœuf.');
+INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('poisson.jpg', 'Saumon à la sauce', @idCategorie, 28.5, 0, 'Un plat de la cuisine française, reprenant le principe du steak tartare, mais en l''appliquant au saumon.');
 
 
 INSERT INTO TCATEGORIES(categorie) VALUES('Dessert'); SET @idCategorie = (SELECT SCOPE_IDENTITY());
