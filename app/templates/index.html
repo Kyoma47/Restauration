@@ -50,10 +50,9 @@ https://templatemo.com/tm-539-simple-house
 								<li class="tm-nav-li"><a href="/a-propos" class="tm-nav-link">A Propos</a></li>
 								<li class="tm-nav-li"><a href="/contact" class="tm-nav-link">Contact </a></li>
 
-								{% set produits = 4 %}
 								<li class="tm-nav-li">
 									<a href="/panier" class="tm-nav-link">
-										Panier ({{produits}})
+										Panier ({{panier}})
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 									</a>
 								</li>
@@ -100,7 +99,7 @@ https://templatemo.com/tm-539-simple-house
 							<figcaption style="height:250px;">
 								<h4 class="tm-gallery-title">{{produit.menu}}</h4>
 								<p class="tm-gallery-description" style="height:120px;">{{produit.description}}</p>
-								<a href="/a-propos" class="tm-btn tm-btn-success tm-right" style="padding:9px; float:right;">
+								<a href="/ajouter-menu/{{produit.id}}" class="tm-btn tm-btn-success tm-right" style="padding:9px; float:right;">
 									<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; Commander
 								</a>
 								<p class="tm-gallery-price"> {{produit.prix()}} Dh</p>

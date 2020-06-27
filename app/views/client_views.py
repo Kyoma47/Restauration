@@ -1,8 +1,8 @@
 from app import app
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 
-from app.lecture_db import read_sql_server
+from app.lecture_db import *
 
 class Employe:
     def __init__(self, prenom, nom, image, statut, desctiption="",
@@ -36,21 +36,36 @@ employes = [
     "about-04.jpg", "Directeur Culinaire")
 ]
 
+liste = []
 
 @app.route('/')
 def accueil():
     menus  = read_sql_server("TMENUS")
     categs = read_sql_server("TCATEGORIES")
-    return render_template("index.html", categories=categs, menus=menus)
+    return render_template("index.html", categories=categs, menus=menus, panier=len(liste))
+
+@app.route('/ajouter-plat/<int:id>')
+def ajouter_plat(id):
+    print("plat :", id)
+    liste.append( read_plat(id_plat=id) )
+    return redirect( url_for('accueil') )
+
+@app.route('/ajouter-menu/<int:id>')
+def ajouer_menu(id):
+    menu = read_menu(id_menu=id)
+    print("menu :", menu)
+    liste.append( menu )
+    return redirect( url_for('accueil') )
+
 
 @app.route('/a-propos')
 def about():
-    return render_template("about.html", employes=employes)
+    return render_template("about.html", employes=employes, panier=len(liste))
 
 @app.route('/contact')
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", panier=len(liste))
 
 @app.route('/panier')
 def panier():
-    return render_template("panier.html")
+    return render_template("panier.html", menus=liste, panier=len(liste))
