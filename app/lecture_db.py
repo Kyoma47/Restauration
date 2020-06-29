@@ -43,8 +43,8 @@ class Plat:
 
 class Menu :
     def __init__(self, id, menu, description, image):
-        self.id = id
-        self.menu = menu
+        self.id_menu = id
+        self.titre = menu
         self.image = image
         self.description = description
 
@@ -82,10 +82,10 @@ def read_sql_server(table_name):
         cursor.execute(f"SELECT * FROM {table_name}")
         for row in cursor :
             test = table_name.capitalize()
-            if test == "Tcategories" : objet= Categorie(*row)
-            if test == "Tplats_menus": objet= Plat_Menu(*row)
-            if test == "Tplats": objet= Plat(*row)
-            if test == "Tmenus": objet= Menu(*row)
+            if test == "Tcategories" : objet = Categorie(*row)
+            if test == "Tplats_menus": objet = Plat_Menu(*row)
+            if test == "Tplats"      : objet = Plat(*row)
+            if test == "Tmenus"      : objet = Menu(*row)
             liste.append(objet)
     connection.close()
     return liste

@@ -30,8 +30,8 @@ DECLARE @idCategorie int, @idPlat int;
 
 INSERT INTO TCATEGORIES(categorie) VALUES('Pizza');
 SET @idCategorie = (SELECT SCOPE_IDENTITY());
+  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('mini-pizza.jpeg', 'Mini Pizza',       @idCategorie, 12, 1, 'Petites pizza en pain à Hamburger, purée de tomate, mozzarella, chorizo coupé en fines lammelles.');
   INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('4saisons.jpeg', 'Pizza Quatre Saisons', @idCategorie, 32.5, 1, 'Garnie de mozzarella, sauce tomate, pepperoni, poivrons verts, champignons.');
-  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('mini-pizza.jpeg', 'Mini Pizza', @idCategorie, 12, 1, 'Petites pizza en pain à Hamburger, purée de tomate, mozzarella, chorizo coupé en fines lammelles.');
   INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('pepperoni.jpeg', 'Pizza Pepperoni', @idCategorie, 35.75, 1, 'A base d''une délicieuse pâte à pizza maison avec une sauce tomate minute, de la mozza di buffala et des tranches de pepperoni.');
   INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('margharita.jpg', 'Pizza Margharita', @idCategorie, 20.5, 1, 'Garnie de tomates, de mozzarella, de basilic frais, de sel et d''huile d''olive.');
   SET @idPlat = (SELECT SCOPE_IDENTITY());
@@ -39,7 +39,7 @@ SET @idCategorie = (SELECT SCOPE_IDENTITY());
 
 INSERT INTO TCATEGORIES(categorie) VALUES('Boisson');
 SET @idCategorie = (SELECT SCOPE_IDENTITY());
-  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('pepsi.jpeg', 'Pepsi Cola', @idCategorie, 13.5, 0, 'Cannette de la boisson gazeuse Pepsi-Cola.');
+  INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('pepsi.jpeg',      'Pepsi Cola', @idCategorie, 13.5, 0, 'Cannette de la boisson gazeuse Pepsi-Cola.');
   INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('eau-gazeuse.jpeg', 'Eau gazeuse', @idCategorie, 12, 0, 'Eau dans laquelle plusieurs gaz se trouvent dissous par une action naturelle.');
   INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('eau-minerale.jpeg', 'Eau minérale', @idCategorie, 15, 1, 'Eau provenant d''une nappe souterraine et contenant des matières minérales.');
 --
@@ -107,7 +107,22 @@ INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES
 INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('gateau.jpeg', 'Gâteau à la crème', @idCategorie, 12.25, 0, 'Pâtisserie préparée à partir d''une pâte sucrée cuite au four garni de crème et de glaçage.');
 INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('macarons.jpeg', 'Macarons', @idCategorie, 7.5, 1, 'Petit gâteau à l''amande, granuleux et moelleux, à la forme arrondie dérivé de la meringue.');
 
+--/*
+DECLARE @Id int, @IdMenu int
 
+WHILE (SELECT Count(*) FROM TPLATS WHERE Processed = 0) > 0
+BEGIN
+    SELECT Top 1 @Id = Id FROM TPLATS WHERE Processed = 0
+
+    --/* Do some processing here
+    INSERT INTO TMENUS(image, menu, description) VALUES( (SELECT Image, Plat, Description FROM TPLATS WHERE IdPlat=Id) );
+    SET @IdMenu = (SELECT SCOPE_IDENTITY());
+    INSERT INTO TPLATS_MENUS(IdMenu, IdPlat, Qt, Remise) VALUES(@IdMenu, Id, 1, 0);
+    --Do some processing here */
+
+    UPDATE ATable SET Processed = 1 WHERE Id = @Id
+END
+--*/
 SELECT * FROM TMENUS ;
 SELECT * FROM TCATEGORIES ;
 SELECT * FROM TPLATS_MENUS ;
