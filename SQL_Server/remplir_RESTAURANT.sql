@@ -107,21 +107,32 @@ INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES
 INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('gateau.jpeg', 'Gâteau à la crème', @idCategorie, 12.25, 0, 'Pâtisserie préparée à partir d''une pâte sucrée cuite au four garni de crème et de glaçage.');
 INSERT INTO TPLATS(image, plat, idCategorie, prix, livrable, description) VALUES('macarons.jpeg', 'Macarons', @idCategorie, 7.5, 1, 'Petit gâteau à l''amande, granuleux et moelleux, à la forme arrondie dérivé de la meringue.');
 
+
 --/*
+DROP TABLE #Temp
+--
+SELECT *
+INTO   #Temp
+FROM   TPLATS
+
 DECLARE @Id int, @IdMenu int
 
-WHILE (SELECT Count(*) FROM TPLATS WHERE Processed = 0) > 0
+WHILE (SELECT Count(*) FROM #Temp) > 0
 BEGIN
-    SELECT Top 1 @Id = Id FROM TPLATS WHERE Processed = 0
 
-    --/* Do some processing here
-    INSERT INTO TMENUS(image, menu, description) VALUES( (SELECT Image, Plat, Description FROM TPLATS WHERE IdPlat=Id) );
-    SET @IdMenu = (SELECT SCOPE_IDENTITY());
-    INSERT INTO TPLATS_MENUS(IdMenu, IdPlat, Qt, Remise) VALUES(@IdMenu, Id, 1, 0);
-    --Do some processing here */
+    SELECT TOP 1 @Id = IdPlat FROM #Temp
 
-    UPDATE ATable SET Processed = 1 WHERE Id = @Id
+    --{ Do some processing here
+    INSERT INTO TMENUS(image, menu, description) SELECT image, plat, description FROM #Temp WHERE IdPlat = @Id;
+	  SET @IdMenu = (SELECT SCOPE_IDENTITY());
+	--
+	INSERT INTO TPLATS_MENUS(IdPlat, IdMenu, Qt, Remise) VALUES(@Id, @IdMenu, 1, 0)
+
+    --Do some processing here }
+
+    DELETE #Temp WHERE IdPlat = @Id
 END
+
 --*/
 SELECT * FROM TMENUS ;
 SELECT * FROM TCATEGORIES ;
