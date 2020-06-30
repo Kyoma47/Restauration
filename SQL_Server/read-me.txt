@@ -1,7 +1,0 @@
-Etapes a suivre pour remplir la base avec le fichier SQL :
-
-- creer une copie de la base RESTAURANT sur SQL Server.
-- ajouter la colonne Image de type NVARCHAR(30) a la table TPLATS en autorisant la valeur NULL.
-- ajouter la colonne Image de type NVARCHAR(30) a la table TMENUS en autorisant la valeur NULL.
-- attention 3andak tnssaw NULL khassha t kon cochee.
-- executer le contenu du fichier 'remplir_RESTAURANT.sql' .
