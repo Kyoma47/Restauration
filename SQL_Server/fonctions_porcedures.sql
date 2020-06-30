@@ -94,11 +94,11 @@ GO
 CREATE PROCEDURE dbo.ps_select_plats_de_categorie (@IdCategorie INT)
 AS
 BEGIN
-  SELECT IdMenu, Plat, Description, Prix, Livrable, Image
-  FROM TPLATS_MENUS, TPLATS
+  SELECT * FROM TPLATS_MENUS, TPLATS
   WHERE
-    TPLATS.IdPlat IN (
-      SELECT IdPlat FROM TPLATS WHERE IdCategorie=@IdCategorie
-    )
-    AND TPLATS_MENUS.IdPlat = TPLATS.IdPlat
+  TPLATS.IdPlat IN (
+    SELECT IdPlat FROM TPLATS WHERE IdCategorie=@IdCategorie
+  )
+  AND TPLATS_MENUS.IdPlat = TPLATS.IdPlat
+  AND dbo.udfNombreDePlats(IdMenu) = 1
 END
