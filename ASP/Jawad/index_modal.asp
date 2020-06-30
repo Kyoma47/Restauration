@@ -30,7 +30,7 @@
 		}
 
 		a:hover {
-			color: Yellow;
+			color: #FFFF50;
 		}
 	</style>
 
@@ -252,13 +252,15 @@ https://templatemo.com/tm-539-simple-house
 							<figure style="width: 250px; height:30em; margin-top:20px;">
 								<img src="/static/img/gallery/menu/<%=RsMenu("Image")%>" alt="<%=RsMenu("Image")%>" class="img-fluid tm-gallery-img" style="width:250px; height:250px;" />
 								<figcaption style="height:250px;">
-									<a href="#myModal-<%= IdModal %>" class="trigger-btn" data-toggle="modal" style="float:right; border: solid blue 1px;">Click </a>
-									<h4 class="tm-gallery-title"> <%=RsMenu("Menu")%> </h4>
 
+									<h4 class="tm-gallery-title"> <%=RsMenu("Menu")%> </h4>
 									<p class="tm-gallery-description" style="height:120px;"><%=RsMenu("Description")%></p>
-									<a href="/ajouter-menu/<%=RsMenu("IdMenu")%>" class="tm-btn tm-btn-success tm-right" style="padding:9px; float:right;">
+
+									<a href="#myModal-<%= IdModal %>" class="tm-btn tm-btn-success tm-right trigger-btn" data-toggle="modal"
+										onclick="ajouter_au_panier(<%=RsMenu("IdMenu")%>)" style="padding:9px; float:right;">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; Commander
 									</a>
+
 									<p class="tm-gallery-price"> <%=RsMenu("PrixMenu")%> Dh</p>
 									<!-- CSS only -->
 
@@ -289,13 +291,15 @@ https://templatemo.com/tm-539-simple-house
 				  %>
 				</div>
 
+
+
 				<%
 			  Set RsPLat = Server.CreateObject("ADODB.RecordSet")
 			  RsCat.MoveFirst
 				IdModal = 1
 
 			  While Not RsCat.EOF
-			      req = "SELECT * FROM TPLATS WHERE IdCategorie=" & RsCat("IdCategorie")
+			      req = "ps_select_plats_de_categorie " & RsCat("IdCategorie")
 			      RsPlat.Open req, cx, 3, 3
 
 			  %>
@@ -307,14 +311,14 @@ https://templatemo.com/tm-539-simple-house
 							<img src="/static/img/gallery/<%=RsCat("Categorie")%>/<%=RsPlat("Image")%>" alt="<%=RsPlat("Image")%>" class="img-fluid tm-gallery-img" style="width:250px; height:250px;" />
 							<figcaption style="height:250px;">
 								<!-- border: solid red 1px; -->
-								<a href="#myModal-plat-<%= IdModal %>" class="trigger-btn" data-toggle="modal" style="float:right; border: solid blue 1px;">Click </a>
 								<h4 class="tm-gallery-title"><%=RsPlat("Plat")%></h4>
 								<p class="tm-gallery-description" style="height:120px;"><%=RsPlat("Description")%></p>
 
-								<a href="/ajouter-plat/<%=RsPlat("IdPlat")%>" class="tm-btn tm-btn-success tm-right" style="padding:9px; float:right;">
-									<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp;
-									Commander
+								<a href="#myModal-plat-<%= IdModal %>" class="tm-btn tm-btn-success tm-right trigger-btn" data-toggle="modal"
+									onclick="ajouter_au_panier(<%=RsPlat("IdMenu")%>)" style="padding:9px; float:right;">
+									<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; Commander
 								</a>
+
 								<p class="tm-gallery-price"> <%=RsPlat("Prix")%> Dh</p>
 								<!-- CSS only -->
 
@@ -405,6 +409,12 @@ https://templatemo.com/tm-539-simple-house
 				$(this).addClass("active");
 			});
 		});
+	</script>
+
+	<script type="text/javascript">
+		function ajouter_au_panier(id_menu) {
+				console.log("menu "+ id_menu +" ajouté au panier.");
+		}
 	</script>
 </body>
 
