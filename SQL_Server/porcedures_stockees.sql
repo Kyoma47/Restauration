@@ -11,7 +11,7 @@ BEGIN
   SELECT *, dbo.udfPrixMenu(IdMenu) AS PrixMenu FROM TMENUS
   WHERE (
 	   SELECT COUNT(*) FROM TPLATS_MENUS
-	   WHERE TMENUS.Id Menu = TPLATS_MENUS.IdMenu
+	   WHERE TMENUS.IdMenu = TPLATS_MENUS.IdMenu
 	) > 1
 END
 GO
@@ -37,4 +37,26 @@ BEGIN
 		WHERE
     IdMenu = @IdMenu AND TPLATS.IdPlat = TPLATS_MENUS.IdPlat
 	END
+END
+GO
+-------------------------------------------------------------------------
+
+IF EXISTS (
+  SELECT type_desc, type FROM sys.procedures WITH(NOLOCK)
+  WHERE NAME = 'ps_select_plats_de_categorie' AND type = 'P'
+)
+  DROP PROCEDURE dbo.ps_select_plats_de_categorie
+GO
+
+
+CREATE PROCEDURE dbo.ps_select_plats_de_categorie (@IdCategorie INT)
+AS
+BEGIN
+  SELECT IdMenu, Plat, Description, Prix, Livrable, Image
+  FROM TPLATS_MENUS, TPLATS
+  WHERE
+    TPLATS.IdPlat IN (
+      SELECT IdPlat FROM TPLATS WHERE IdCategorie=@IdCategorie
+    )
+    AND TPLATS_MENUS.IdPlat = TPLATS.IdPlat
 END
