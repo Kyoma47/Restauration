@@ -25,10 +25,10 @@ IF EXISTS (
 GO
 
 CREATE FUNCTION dbo.udfPrixMenu(@IdMenu INTEGER)
-RETURNS INT
+RETURNS FLOAT
 AS
 BEGIN
-  DECLARE @prixMenu AS INT;
+  DECLARE @prixMenu AS FLOAT;
   SELECT  @prixMenu = SUM(Total) FROM (
 	   SELECT (Qt * (Prix - Prix*remise/100) ) AS Total
 	   FROM TPLATS_MENUS,TPLATS
