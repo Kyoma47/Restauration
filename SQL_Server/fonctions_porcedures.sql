@@ -103,9 +103,17 @@ BEGIN
   AND dbo.udfNombreDePlats(IdMenu) = 1
 END
 -------------------------------------------------------------------------
-
-CREATE PROCEDURE dbo.ps_select_menu(@IdMenu Int)
+GO
+ALTER PROCEDURE [dbo].[ps_select_menu](@IdMenu Int)
 AS
 BEGIN
-SELECT *, dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats FROM TMEnus WHERE IdMenu = @IdMenu
+SELECT *, dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats, dbo.udfPrixMenu(@IdMenu) as PrixMenu
+FROM TMEnus WHERE IdMenu = @IdMenu
+END
+
+ALTER PROCEDURE [dbo].[ps_select_menu](@IdMenu Int)
+AS
+BEGIN
+SELECT *, dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats, dbo.udfPrixMenu(@IdMenu) as PrixMenu
+FROM TMEnus WHERE IdMenu = @IdMenu
 END
