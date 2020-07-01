@@ -1,10 +1,19 @@
-IF EXISTS (
-    SELECT * FROM sysobjects WHERE id = object_id(N'udfNombreDePlats')
-    AND xtype IN (N'FN', N'IF', N'TF')
-)
-    DROP FUNCTION udfNombreDePlats
-GO
+-- Suppression des Procedures et fonctions :
+------------------------------------------------------------------------
+DECLARE @sql NVARCHAR(MAX) = N'';
+--
+SELECT @sql = @sql + N' DROP FUNCTION ' + QUOTENAME(SCHEMA_NAME(schema_id)) + N'.' + QUOTENAME(name)
+FROM sys.objects WHERE  type_desc LIKE '%FUNCTION%' AND type_desc NOT LIKE 'fn_%'
+--
+SELECT @sql = @sql + N' DROP PROCEDURE ' + QUOTENAME(SCHEMA_NAME(schema_id)) + N'.' + QUOTENAME(name)
+FROM sys.objects WHERE type_desc LIKE '%PROCEDURE%' AND type_desc NOT LIKE 'sp_%'
+--
+EXEC sp_executesql @sql
 
+GO
+------------------------------------------------------------------------
+-- Fonctions :
+------------------------------------------------------------------------
 CREATE FUNCTION dbo.udfNombreDePlats(@IdMenu INTEGER)
 RETURNS INT
 AS
@@ -16,14 +25,6 @@ BEGIN
 END
 GO
 --------------------------------------------------------------------------
-
-IF EXISTS (
-    SELECT * FROM sysobjects WHERE id = object_id(N'udfPrixMenu')
-    AND xtype IN (N'FN', N'IF', N'TF')
-)
-    DROP FUNCTION udfPrixMenu
-GO
-
 CREATE FUNCTION dbo.udfPrixMenu(@IdMenu INTEGER)
 RETURNS FLOAT
 AS
@@ -40,13 +41,6 @@ GO
 ---------------------------------------------------------------------------
 -- Fonctions(haut) /  Procedures(bas)
 ---------------------------------------------------------------------------
-IF EXISTS (
-  SELECT type_desc, type FROM sys.procedures WITH(NOLOCK)
-  WHERE NAME = 'ps_select_menus' AND type = 'P'
-)
-  DROP PROCEDURE dbo.ps_select_menus
-GO
-
 CREATE PROCEDURE ps_select_menus
 AS
 BEGIN
@@ -57,17 +51,7 @@ BEGIN
 	) > 1
 END
 GO
-
 -------------------------------------------------------------------------
-
-IF EXISTS (
-  SELECT type_desc, type FROM sys.procedures WITH(NOLOCK)
-  WHERE NAME = 'ps_select_plats_du_menu' AND type = 'P'
-)
-  DROP PROCEDURE dbo.ps_select_plats_du_menu
-GO
-
-
 CREATE PROCEDURE dbo.ps_select_plats_du_menu (@IdMenu INT)
 AS
 BEGIN
@@ -76,21 +60,11 @@ BEGIN
 		--IdMenu, IdPlat, Qt, Remise, Description, prix, livrable, Image
 		SELECT *, (Qt * (Prix - Prix*remise/100) ) AS PrixQtRemise
 		FROM TPLATS_MENUS,TPLATS
-		WHERE
-    IdMenu = @IdMenu AND TPLATS.IdPlat = TPLATS_MENUS.IdPlat
+		WHERE IdMenu = @IdMenu AND TPLATS.IdPlat = TPLATS_MENUS.IdPlat
 	END
 END
 GO
 -------------------------------------------------------------------------
-
-IF EXISTS (
-  SELECT type_desc, type FROM sys.procedures WITH(NOLOCK)
-  WHERE NAME = 'ps_select_plats_de_categorie' AND type = 'P'
-)
-  DROP PROCEDURE dbo.ps_select_plats_de_categorie
-GO
-
-
 CREATE PROCEDURE dbo.ps_select_plats_de_categorie (@IdCategorie INT)
 AS
 BEGIN
@@ -102,21 +76,28 @@ BEGIN
   AND TPLATS_MENUS.IdPlat = TPLATS.IdPlat
   AND dbo.udfNombreDePlats(IdMenu) = 1
 END
+GO
 -------------------------------------------------------------------------
-GO
-
-IF EXISTS (
-  SELECT type_desc, type FROM sys.procedures WITH(NOLOCK)
-  WHERE NAME = 'ps_select_menu' AND type = 'P'
-)
-  DROP PROCEDURE dbo.ps_select_menu
-GO
-
-CREATE PROCEDURE [dbo].[ps_select_menu](@IdMenu Int)
+CREATE PROCEDURE ps_select_menu(@IdMenu INT)
 AS
 BEGIN
   SELECT *,
-    dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats,
-    dbo.udfPrixMenu(@IdMenu) AS PrixMenu
+    dbo.udfPrixMenu(@IdMenu)    AS PrixMenu,
+    dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats
   FROM TMENUS WHERE IdMenu = @IdMenu
 END
+GO
+------------------------------------------------------------------
+CREATE PROCEDURE ps_select_random_menus(@NombreDeMenus INT)
+AS
+BEGIN
+	SELECT TOP(@NombreDeMenus) * FROM TMENUS ORDER BY NEWID()
+END
+GO
+
+-- Selectioner les fonctions et procedures de la base
+-----------------------------------------------------------------------
+SELECT name AS 'Fonctions et Procedures' FROM sys.objects
+WHERE type_desc LIKE '%FUNCTION%' AND name NOT LIKE 'fn_%'
+OR	type_desc LIKE '%PROCEDURE%' AND name NOT LIKE 'sp_%'
+GO
