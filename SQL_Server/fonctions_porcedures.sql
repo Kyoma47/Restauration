@@ -104,16 +104,19 @@ BEGIN
 END
 -------------------------------------------------------------------------
 GO
-ALTER PROCEDURE [dbo].[ps_select_menu](@IdMenu Int)
-AS
-BEGIN
-SELECT *, dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats, dbo.udfPrixMenu(@IdMenu) as PrixMenu
-FROM TMEnus WHERE IdMenu = @IdMenu
-END
 
-ALTER PROCEDURE [dbo].[ps_select_menu](@IdMenu Int)
+IF EXISTS (
+  SELECT type_desc, type FROM sys.procedures WITH(NOLOCK)
+  WHERE NAME = 'ps_select_menu' AND type = 'P'
+)
+  DROP PROCEDURE dbo.ps_select_menu
+GO
+
+CREATE PROCEDURE [dbo].[ps_select_menu](@IdMenu Int)
 AS
 BEGIN
-SELECT *, dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats, dbo.udfPrixMenu(@IdMenu) as PrixMenu
-FROM TMEnus WHERE IdMenu = @IdMenu
+  SELECT *,
+    dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats,
+    dbo.udfPrixMenu(@IdMenu) AS PrixMenu
+  FROM TMENUS WHERE IdMenu = @IdMenu
 END
