@@ -102,3 +102,18 @@ BEGIN
   AND TPLATS_MENUS.IdPlat = TPLATS.IdPlat
   AND dbo.udfNombreDePlats(IdMenu) = 1
 END
+-------------------------------------------------------------------------
+GO
+ALTER PROCEDURE [dbo].[ps_select_menu](@IdMenu Int)
+AS
+BEGIN
+SELECT *, dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats, dbo.udfPrixMenu(@IdMenu) as PrixMenu
+FROM TMEnus WHERE IdMenu = @IdMenu
+END
+
+ALTER PROCEDURE [dbo].[ps_select_menu](@IdMenu Int)
+AS
+BEGIN
+SELECT *, dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats, dbo.udfPrixMenu(@IdMenu) as PrixMenu
+FROM TMEnus WHERE IdMenu = @IdMenu
+END
