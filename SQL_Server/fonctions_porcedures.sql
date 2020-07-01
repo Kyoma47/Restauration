@@ -102,3 +102,10 @@ BEGIN
   AND TPLATS_MENUS.IdPlat = TPLATS.IdPlat
   AND dbo.udfNombreDePlats(IdMenu) = 1
 END
+-------------------------------------------------------------------------
+
+CREATE PROCEDURE dbo.ps_select_menu(@IdMenu Int)
+AS
+BEGIN
+SELECT *, dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats FROM TMEnus WHERE IdMenu = @IdMenu
+END
