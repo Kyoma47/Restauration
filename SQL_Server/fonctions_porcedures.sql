@@ -14,7 +14,7 @@ GO
 ------------------------------------------------------------------------
 -- Fonctions :
 ------------------------------------------------------------------------
-CREATE FUNCTION dbo.udfNombreDePlats(@IdMenu INTEGER)
+CREATE FUNCTION dbo.udf_NombreDePlats(@IdMenu INTEGER)
 RETURNS INT
 AS
 BEGIN
@@ -25,7 +25,23 @@ BEGIN
 END
 GO
 --------------------------------------------------------------------------
-CREATE FUNCTION dbo.udfPrixMenu(@IdMenu INTEGER)
+CREATE FUNCTION dbo.udf_GetCategorie(@IdMenu INT)
+RETURNS NVARCHAR(30)
+AS BEGIN
+  IF dbo.udf_NombreDePlats(@IdMenu) > 1
+  BEGIN RETURN 'Menu' END
+	RETURN (
+		SELECT Categorie FROM TCATEGORIES
+		WHERE IdCategorie IN (
+			SELECT IdCategorie FROM TPLATS_MENUS, TPLATS
+			WHERE IdMenu = @IdMenu
+			AND	TPLATS_MENUS.IdPlat = TPLATS.IdPlat
+		)
+	)
+END
+GO
+--------------------------------------------------------------------------
+CREATE FUNCTION dbo.udf_PrixMenu(@IdMenu INTEGER)
 RETURNS FLOAT
 AS
 BEGIN
@@ -35,7 +51,7 @@ BEGIN
 	   FROM TPLATS_MENUS,TPLATS
 	   WHERE IdMenu = @IdMenu AND TPLATS.IdPlat = TPLATS_MENUS.IdPlat
   ) AS T
-  RETURN  @prixMenu;
+  RETURN  ROUND(@prixMenu, 2);
 END
 GO
 ---------------------------------------------------------------------------
@@ -44,7 +60,7 @@ GO
 CREATE PROCEDURE ps_select_menus
 AS
 BEGIN
-  SELECT *, dbo.udfPrixMenu(IdMenu) AS PrixMenu FROM TMENUS
+  SELECT *, dbo.udf_PrixMenu(IdMenu) AS PrixMenu FROM TMENUS
   WHERE (
 	   SELECT COUNT(*) FROM TPLATS_MENUS
 	   WHERE TMENUS.IdMenu = TPLATS_MENUS.IdMenu
@@ -55,10 +71,12 @@ GO
 CREATE PROCEDURE dbo.ps_select_plats_du_menu (@IdMenu INT)
 AS
 BEGIN
-	IF dbo.udfNombreDePlats(@IdMenu) > 1
+	IF dbo.udf_NombreDePlats(@IdMenu) > 1
 	BEGIN
 		--IdMenu, IdPlat, Qt, Remise, Description, prix, livrable, Image
-		SELECT *, (Qt * (Prix - Prix*remise/100) ) AS PrixQtRemise
+		SELECT *, (Qt * (Prix - Prix*remise/100) ) AS PrixQtRemise,
+			(SELECT Categorie FROM TCATEGORIES
+			WHERE TCATEGORIES.IdCategorie=TPLATS.IdCategorie) AS Categorie
 		FROM TPLATS_MENUS,TPLATS
 		WHERE IdMenu = @IdMenu AND TPLATS.IdPlat = TPLATS_MENUS.IdPlat
 	END
@@ -74,7 +92,7 @@ BEGIN
     SELECT IdPlat FROM TPLATS WHERE IdCategorie=@IdCategorie
   )
   AND TPLATS_MENUS.IdPlat = TPLATS.IdPlat
-  AND dbo.udfNombreDePlats(IdMenu) = 1
+  AND dbo.udf_NombreDePlats(IdMenu) = 1
 END
 GO
 -------------------------------------------------------------------------
@@ -82,8 +100,9 @@ CREATE PROCEDURE ps_select_menu(@IdMenu INT)
 AS
 BEGIN
   SELECT *,
-    dbo.udfPrixMenu(@IdMenu)    AS PrixMenu,
-    dbo.udfNombreDePlats(@IdMenu) AS NombreDePlats
+    dbo.udf_PrixMenu(@IdMenu)    AS PrixMenu,
+    dbo.udf_GetCategorie(@IdMenu) AS Categorie,
+    dbo.udf_NombreDePlats(@IdMenu) AS NombreDePlats
   FROM TMENUS WHERE IdMenu = @IdMenu
 END
 GO
@@ -94,7 +113,7 @@ BEGIN
 	SELECT TOP(@NombreDeMenus) * FROM TMENUS ORDER BY NEWID()
 END
 GO
-
+-------------------------------------------------------------------
 -- Selectioner les fonctions et procedures de la base
 -----------------------------------------------------------------------
 SELECT name AS 'Fonctions et Procedures' FROM sys.objects
