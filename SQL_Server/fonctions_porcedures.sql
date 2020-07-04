@@ -74,7 +74,8 @@ BEGIN
 	IF dbo.udf_NombreDePlats(@IdMenu) > 1
 	BEGIN
 		--IdMenu, IdPlat, Qt, Remise, Description, prix, livrable, Image
-		SELECT *, (Qt * (Prix - Prix*remise/100) ) AS PrixQtRemise,
+		SELECT *,
+      ROUND((Qt * (Prix - Prix*remise/100), 2) AS PrixQtRemise,
 			(SELECT Categorie FROM TCATEGORIES
 			WHERE TCATEGORIES.IdCategorie=TPLATS.IdCategorie) AS Categorie
 		FROM TPLATS_MENUS,TPLATS
