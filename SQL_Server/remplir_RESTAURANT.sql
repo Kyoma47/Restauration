@@ -2,7 +2,7 @@ DELETE FROM TMENUS ;
 DELETE FROM TCATEGORIES ;
 DELETE FROM TPLATS ;
 DELETE FROM TPLATS_MENUS ;
-
+DELETE FROM TCLIENTS ;
 
 IF NOT EXISTS( SELECT * FROM sys.all_columns WHERE Name = N'Image' and Object_ID = Object_ID(N'TPLATS') )
 ALTER TABLE TPLATS ADD Image VARCHAR(30) SELECT * FROM TPLATS ;
@@ -139,9 +139,20 @@ BEGIN
 
     DELETE #Temp WHERE IdPlat = @Id
 END
+---------------------------------------------------------------------------------------
+INSERT INTO TCLIENTS(NomClient,PrenomClient,AdresseClient,CodePostalClient,VilleClient,TelClient,EmailClient)
+VALUES('Mediane', 'Jawad', 'blabla', 35000,'Ifrane', '0606060606', 'mediane.jawad@gmail.com')
+
+INSERT INTO TCLIENTS(NomClient,PrenomClient,AdresseClient,CodePostalClient,VilleClient,TelClient,EmailClient)
+VALUES('Oqadi', 'Oum Keltoum', 'blabla', 20200,'Casablanca', '0636363636', 'oumkeltoumoqaidi@gmail.com')
+
+INSERT INTO TCLIENTS(NomClient,PrenomClient,AdresseClient,CodePostalClient,VilleClient,TelClient,EmailClient)
+VALUES('Soulkane', 'Siham', 'blabla', 20190,'Casablanca', '0696969696', 'siham.soulkane@gmail.com')
+
 
 --*/
 SELECT * FROM TMENUS ;
 SELECT * FROM TCATEGORIES ;
 SELECT * FROM TPLATS_MENUS ;
 SELECT * FROM TPLATS ;
+SELECT * FROM TCLIENTS ;

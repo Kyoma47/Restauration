@@ -10,5 +10,8 @@
         Session("panier") = panier
 
         Session("achat") = false
+
+        Session("idClient") = 239
+
   End Sub
 </script>

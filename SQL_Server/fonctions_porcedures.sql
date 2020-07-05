@@ -54,6 +54,17 @@ BEGIN
   RETURN  ROUND(@prixMenu, 2);
 END
 GO
+--------------------------------------------------------------------------
+CREATE FUNCTION dbo.udf_NouvelleFacture(@IdClient INTEGER)
+RETURNS INT
+AS
+BEGIN
+  DECLARE @idFacture AS INT;
+  INSERT INTO TFATURES (IdClient, DateFacturation) VALUES (@IdClient, GETDATE())
+  SET @idFacture = (SELECT SCOPE_IDENTITY());
+  RETURN  @idFacture;
+END
+GO
 ---------------------------------------------------------------------------
 -- Fonctions(haut) /  Procedures(bas)
 ---------------------------------------------------------------------------
