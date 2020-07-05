@@ -41,11 +41,14 @@
 			let ids = document.getElementsByName("idMenu")
 			for (var input of ids) {
 				var id = input.defaultValue
+				var totalMenu = document.getElementById("total-"+id)
 				qt = document.getElementById("qt-"+id).value
 				if ((remise = document.getElementById("remise-"+id)) != null) {
 					remises += qt * parseFloat(remise.defaultValue)
 				}
-				total += qt*parseFloat(document.getElementById("prix-"+id).defaultValue)
+				prix = parseFloat(document.getElementById("prix-"+id).defaultValue)
+				total += qt*prix
+				totalMenu.innerHTML = qt*prix
 			}
 			document.getElementById("remises").innerHTML = remises
 			document.getElementById("total").innerHTML = total
@@ -281,7 +284,9 @@
 	                <td class="align-middle p-4">
 										<input type="number" min="1" name="qt" id="qt-<%=Rs_menu("IdMenu")%>" class="form-control text-center" value="<%= panier(i,1) %>" oninput="calculer()">
 									</td>
-								  <td class="text-right font-weight-semibold align-middle p-4"><%= RS_menu("PrixMenu")*panier(i,1) %> DH</td>
+								  <td class="text-right font-weight-semibold align-middle p-4">
+										<span id="total-<%=RS_menu("idMenu")%>"> <!-- <%= RS_menu("PrixMenu")*panier(i,1) %> --> </span> DH
+									</td>
 
 	                <td class="text-center align-middle px-0">
 										<form class="suppression" method="post" onsubmit="console.log('suppression !', <%=Rs_menu("IdMenu")%>)">
@@ -336,13 +341,6 @@
 							<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; Payer
 						</button>
 	        </div>
-
-					<%
-			      If Request.Form("idMenu") <> "" then
-							supprimer( Request.Form("idMenu") )
-							Response.redirect("/panier.asp#facture")
-			      End If
-					%>
 	      </div>
 	    </div>
 		</main>
