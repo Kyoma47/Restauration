@@ -54,17 +54,6 @@ BEGIN
   RETURN  ROUND(@prixMenu, 2);
 END
 GO
---------------------------------------------------------------------------
-CREATE FUNCTION dbo.udf_NouvelleFacture(@IdClient INTEGER)
-RETURNS INT
-AS
-BEGIN
-  DECLARE @idFacture AS INT;
-  INSERT INTO TFATURES (IdClient, DateFacturation) VALUES (@IdClient, GETDATE())
-  SET @idFacture = (SELECT SCOPE_IDENTITY());
-  RETURN  @idFacture;
-END
-GO
 ---------------------------------------------------------------------------
 -- Fonctions(haut) /  Procedures(bas)
 ---------------------------------------------------------------------------
@@ -125,7 +114,14 @@ BEGIN
 	SELECT TOP(@NombreDeMenus) * FROM TMENUS ORDER BY NEWID()
 END
 GO
--------------------------------------------------------------------
+------------------------------------------------------------------
+CREATE PROCEDURE ps_nouvelle_facture(@IdClient INTEGER)
+AS
+BEGIN
+  DECLARE @idFacture AS INT;
+  INSERT INTO TFACTURES (IdClient, DateFacturation) VALUES (@IdClient, GETDATE())
+  SET @idFacture = (SELECT SCOPE_IDENTITY());
+END
 -- Selectioner les fonctions et procedures de la base
 -----------------------------------------------------------------------
 SELECT name AS 'Fonctions et Procedures' FROM sys.objects
