@@ -30,6 +30,9 @@
 			color: #FFFF50;
 			text-decoration: none;
 		}
+		ul {
+			white-space: nowrap;
+		}
 	</style>
 
 	<script type="text/javascript">
@@ -47,6 +50,16 @@
 			document.getElementById("remises").innerHTML = remises
 			document.getElementById("total").innerHTML = total
  		}
+
+		function commander(){
+			console.log("commande...");
+			for (var input of document.getElementsByName("idMenu")) {
+				var id = input.defaultValue
+				qt = document.getElementById("qt-"+id).value
+				prix = parseFloat(document.getElementById("prix-"+id).defaultValue)
+				console.log("Commande : qt=", qt, ", idMenu=", id);
+			}
+		}
   </script>
 </head>
 
@@ -120,11 +133,10 @@
 							</div>
 						</div>
 						<nav class="col-md-6 col-12 tm-nav">
-							<ul class="tm-nav-ul" style="white-space: nowrap;">
-								<li class="tm-nav-li"><a href="/index.asp" class="tm-nav-link active">Accueil </a></li>
-								<li class="tm-nav-li"><a href="/a-propos" class="tm-nav-link">A Propos</a></li>
-								<li class="tm-nav-li"><a href="/contact" class="tm-nav-link">Contact </a></li>
-
+							<ul class="tm-nav-ul">
+								<li class="tm-nav-li"><a href="/index.asp" class="tm-nav-link">       Accueil </a></li>
+								<li class="tm-nav-li"><a href="/about.asp" class="tm-nav-link active">À propos</a></li>
+								<li class="tm-nav-li"><a href="/contact.asp"  class="tm-nav-link">	  Contact </a></li>
 								<li class="tm-nav-li">
 									<a href="/panier.asp" class="tm-nav-link">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp;
@@ -211,8 +223,6 @@
 	                <td class="p-2">
 	                  <div class="media align-items-center ombre" style="min-width: 350px;">
 	                    <div class="media-body">
-												<input type="number" name="idMenu" value="<%= RS_menu("IdMenu") %>" hidden>
-
 												<img src="/static/img/gallery/<%= RS_menu("Categorie") %>/<%= RS_menu("Image") %>" alt="<%= RS_menu("Image") %>" style="float: left; margin-right:10px; width:150px; height:100px;" >
 												<%= RS_menu("Menu") %><br>
 												<!-- <a href="#" class="d-block text-dark"><%= RS_menu("Menu") %></a> -->
@@ -322,11 +332,17 @@
 								Retour au Menu
 							</button>
 						</a>
-	          <button type="button" class="btn btn-lg btn-primary mt-2">
+	          <button type="button" class="btn btn-lg btn-primary mt-2" onclick="commander()">
 							<i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp; Payer
 						</button>
 	        </div>
 
+					<%
+			      If Request.Form("idMenu") <> "" then
+							supprimer( Request.Form("idMenu") )
+							Response.redirect("/panier.asp#facture")
+			      End If
+					%>
 	      </div>
 	    </div>
 		</main>
@@ -341,7 +357,7 @@
 		<footer class="tm-footer text-center">
 			<p>
 				(2020)
-				<a rel="nofollow" href="https://www.fsts.ac.ma/" style="color: navy;">
+				<a rel="nofollow" href="http://www.fsts.ac.ma/" style="color: navy;">
 				Filière Ingénieur  2ème année - Génie Informatique | &copy;<u>FST Settat</u>
 				</a> |
 				Design: Jawad Mediane, Siham Soulkane, Oum Keltoum Oqaidi.
@@ -355,6 +371,7 @@
 		window.onload = function() {
 			console.log("calcul debut !");
 			calculer();
+			window.scrollTo(0, document.getElementsByTagName("main")[0].offsetTop);
 		};
 	</script>
 </body>

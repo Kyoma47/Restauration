@@ -75,7 +75,7 @@ BEGIN
 	BEGIN
 		--IdMenu, IdPlat, Qt, Remise, Description, prix, livrable, Image
 		SELECT *,
-      ROUND((Qt * (Prix - Prix*remise/100), 2) AS PrixQtRemise,
+			ROUND(Qt*Prix - remise, 2) AS PrixQtRemise,
 			(SELECT Categorie FROM TCATEGORIES
 			WHERE TCATEGORIES.IdCategorie=TPLATS.IdCategorie) AS Categorie
 		FROM TPLATS_MENUS,TPLATS

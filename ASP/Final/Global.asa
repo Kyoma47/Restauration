@@ -1,0 +1,14 @@
+<script language="vbscript" runat="server">
+  Sub Application_OnStart
+    Application("PC") = "Provider=sqloledb; Data Source=DESKTOP-5CJ5JOC\SQLEXPRESS; Initial Catalog=CopieRestaurant; User ID=sa; Password=motdepasse"
+    'Application("PC") = "Driver={SQL Server}; Server=DESKTOP-5CJ5JOC\SQLEXPRESS; DataBase=CopieRestaurant; Uid=sa; Pwd=motdepasse;"
+  End Sub
+
+  Sub Session_OnStart
+        dim panier(100, 2)
+        ''
+        Session("panier") = panier
+
+        Session("achat") = false
+  End Sub
+</script>
